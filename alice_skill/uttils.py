@@ -1,5 +1,5 @@
-from config import *
-import view.texts as texts
+from alice_skill.config import *
+import alice_skill.view.texts as texts
 
 
 def make_response(text, tts=None, card=None, state=None, buttons=None):
