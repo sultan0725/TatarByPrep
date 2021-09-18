@@ -6,3 +6,4 @@ class User(StatesGroup):
     MAIN_MENU = State()
     START_SEND_LOGIN = State()
     START_SEND_PASSWORD = State()
+    SEND_TRASLATIONS = State()
