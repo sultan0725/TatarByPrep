@@ -1,0 +1,25 @@
+users:
+  id - int                    | id
+  name - string255            | имя
+  email - string255           | мыло
+  password - string255        | пароль
+  remember_token - string255 
+  email_verified_at - date   
+  created_at - date       
+  updated_at - date
+
+word_group:
+  id - int                | id
+  name_origin - string255 | имя группы на татарском
+  name_rus - string255    | имя группы на русском
+  created_at - date       
+  updated_at - date
+
+word_list:
+  id - int                  | id
+  word_original - string255 | имя слова на татарском
+  word_rus - string255      | имя слова на русском
+  group_id - int            | id группы
+  created_at - date       
+  updated_at - date
+  
