@@ -23,3 +23,9 @@ word_list:
   created_at - date       
   updated_at - date
   
+user_progress:
+  id - int            | id
+  task_id - int       | id слова
+  milliseconds - int  | кол-во миллисекунд с прошедшего решения
+  create_at - date
+  updated_at - date

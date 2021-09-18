@@ -10,3 +10,4 @@ class IntentsNames:
     tatar_rules = "tatar_rules"
     find_excess = "find_excess"
     lets_lern = "lets_lern"
+    stop = "stop"

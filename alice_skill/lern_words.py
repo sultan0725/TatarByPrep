@@ -13,7 +13,7 @@ def chose_category():
         items.append(item(title=category["name_origin"], description=category["name_rus"],
                           img_button=button(category["name_origin"], payload={"category_button": category["id"]})))
     return make_response(text="",
-                         tts="",
+                         tts=texts.CHOOSE_CATEGORY,
                          card=items_list(content=items,
                                          header=texts.CHOOSE_CATEGORY))
 
@@ -21,9 +21,18 @@ def chose_category():
 def learn_words_by_num(category, step):
     all_word = api.get_all_words_in_category(category)
     if len(all_word) <= step:
-        pass
+        return make_response(
+            text=texts.CONGRATS_LERN
+        )
     word = all_word[step]
     return make_response(
-        text= texts.WORD_TEMPALTE.format()
-
+        text=texts.WORD_TEMPALTE.format(
+            word=word["name_origin"],
+            translate=word["name_rus"]),
+        tts=tts.WORD_TEMPALTE.format(
+            word=word["name_origin"],
+            translate=word["name_rus"]),
+        state={'active_skill': "learn_words",
+               "step": step + 1,
+               "category": category}
     )
