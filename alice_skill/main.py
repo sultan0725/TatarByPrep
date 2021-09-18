@@ -9,8 +9,10 @@ def handler(event, context):
     intents = event["request"].get("nlu", {}).get('intents', [])
     if event["session"]['new']:
         return start()
-    if IntentsNames.send_fact in intents:
+    elif IntentsNames.send_fact in intents:
         return random_fact.send_random_fact()
+    elif IntentsNames.tatar_rules in intents:
+        return lexical_rules.about_rules(event)
     else:
         return fallback_response()
 

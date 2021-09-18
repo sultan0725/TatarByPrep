@@ -45,19 +45,26 @@ def image(image_id, title=None, description=None, img_button=None):
         "button": img_button
     }
 
+def item(image_id=None, title=None, description=None, img_button=None):
+    return {
+        "image_id": image_id,
+        "title": title,
+        "description": description,
+        "button": img_button
+    }
 
 def big_image(image_to_show):
     image_to_show['type'] = 'BigImage'
     return image_to_show
 
 
-def items_list(images, header=None, footer=None, footer_button=None):
+def items_list(content, header, footer=None, footer_button=None):
     return {
         "type": "ItemsList",
         "header": {
             "text": header,
         },
-        "items": images,
+        "items": content,
         "footer": {
             "text": footer,
             "button": footer_button
