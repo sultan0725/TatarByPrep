@@ -21,6 +21,8 @@ def handler(event, context):
     elif state.get('active_skill', None):
         if state['active_skill'] == "learn_words":
             return lern_words.learn_words_by_num(state["category"], state["step"])
+    elif state.get("screen") == "begin_find_excess":
+        return find_excess.continue_find_excess(event, payload=payload)
     # интенты
     elif IntentsNames.send_fact in intents:
         return random_fact.send_random_fact()
@@ -30,12 +32,7 @@ def handler(event, context):
         return lexical_rules.about_rules(event)
     elif IntentsNames.find_excess in intents:
         return find_excess.start_find_excess()
-    elif state.get("screen") == "begin_find_excess":
-        return find_excess.continue_find_excess(event, payload=payload)
-    elif payload.get("category_button", False):
-        return lern_words.learn_words_by_num(payload["category_button"], 0)
-    elif state.get('active_skill', None):
-        pass
+
     else:
         return fallback_response()
 
