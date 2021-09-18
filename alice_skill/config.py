@@ -11,3 +11,4 @@ class IntentsNames:
     find_excess = "find_excess"
     lets_lern = "lets_lern"
     stop = "stop"
+    start_play = "start_play"

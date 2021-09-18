@@ -10,6 +10,7 @@ def handler(event, context):
     intents = event["request"].get("nlu", {}).get('intents', [])
     state = event.get('state').get(REQUEST_STATE, {})
     payload = event["request"].get('payload', {})
+
     if event["session"]['new']:
         return start()
     elif IntentsNames.stop in intents:
@@ -21,8 +22,13 @@ def handler(event, context):
     elif state.get('active_skill', None):
         if state['active_skill'] == "learn_words":
             return lern_words.learn_words_by_num(state["category"], state["step"])
-    elif state.get("screen") == "begin_find_excess":
-        return find_excess.continue_find_excess(event, payload=payload)
+    elif state.get("screen", None) == "begin_find_excess":
+        if  IntentsNames.start_play in intents:
+            return find_excess.continue_find_excess(idd=state.get("id", None), payload=payload)
+        else:
+            return fallback_response('Вы вышли из мини-игры "лишнее слово". Теперь вы в главном меню')
+    elif state.get("screen", None) == "find_excess":
+        return find_excess.continue_find_excess(idd=state.get("id", None), payload=payload)
     # интенты
     elif IntentsNames.send_fact in intents:
         return random_fact.send_random_fact()

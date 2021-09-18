@@ -1,3 +1,4 @@
+import random
 import alice_skill.view.texts as texts
 import alice_skill.view.keyboards as keyboards
 import alice_skill.view.tts as tts
@@ -12,7 +13,7 @@ def start_find_excess():
                          buttons=[button("Начинаем", hide=True)])
 
 
-def continue_find_excess(event, payload):
+def continue_find_excess(idd, payload):
     box = choice(data.excess)
     if payload.get("excess", None) == 1:
         head = "Все верно. Идем дальше"
@@ -22,10 +23,28 @@ def continue_find_excess(event, payload):
             if i["id"] == payload["id"]:
                 box = i
                 break
+    elif idd:
+        head = "Выберите ответ из кнопок. Либо скажите 'хватит'"
+        buttons = []
+        for i in data.excess:
+            if i["id"] == idd:
+                box = i
+                break
+
+        for i in box["question"]:
+            buttons.append(
+                button(title=i, hide=True, payload={"excess": 1 if box["answer"] == i else 0, "id": box["id"]}))
+
+        return make_response(text=head, state={"screen": "find_excess", "id": box["id"]}, buttons=buttons)
     else:
         head = "Выберите лишнее:"
 
-    items = [item(description=i) for i in box["question"]]
-    buttons = [button(title=i, hide=True, payload={"excess": 1 if box["answer"] == i else 0, "id": box["id"]}) for i in box["question"]]
-    return make_response(text=texts.RULE_GAME, state={"screen": "begin_find_excess"},
+    items = []
+    buttons = []
+    random.shuffle(box["question"])
+    for i in box["question"]:
+        items.append(item(description=i))
+        buttons.append(button(title=i, hide=True, payload={"excess": 1 if box["answer"] == i else 0, "id": box["id"]}))
+
+    return make_response(text=head, state={"screen": "find_excess", "id": box["id"]},
                          card=items_list(content=items, header=head), buttons=buttons)
