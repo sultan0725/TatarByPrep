@@ -14,18 +14,16 @@ def handler(event, context):
         return start()
     elif IntentsNames.send_fact in intents:
         return random_fact.send_random_fact()
-
     elif IntentsNames.lets_lern in intents:
         return lern_words.chose_category()
-
     elif IntentsNames.tatar_rules in intents:
         return lexical_rules.about_rules(event)
     elif IntentsNames.find_excess in intents:
-        return find_excess.start_find_excess(event)
-
+        return find_excess.start_find_excess()
+    elif state.get("screen") == "begin_find_excess":
+        return find_excess.continue_find_excess(event, payload=payload)
     elif payload.get("category_button", False):
         return lern_words.learn_words_by_num(payload["category_button"], 0)
-
     elif state.get('active_skill', None):
         pass
     else:
