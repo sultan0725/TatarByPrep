@@ -12,6 +12,14 @@ def handler(event, context):
     payload = event["request"].get('payload', {})
     if event["session"]['new']:
         return start()
+    # пейлоады
+    elif payload.get("category_button", False):
+        return lern_words.learn_words_by_num(payload["category_button"], 0)
+    # статусы
+    elif state.get('active_skill', None):
+        if state['active_skill'] == "learn_words":
+            lern_words.learn_words_by_num(state["category"], state["step"])
+    # интенты
     elif IntentsNames.send_fact in intents:
         return random_fact.send_random_fact()
 
@@ -21,11 +29,6 @@ def handler(event, context):
     elif IntentsNames.tatar_rules in intents:
         return lexical_rules.about_rules(event)
 
-    elif payload.get("category_button", False):
-        return lern_words.learn_words_by_num(payload["category_button"], 0)
-
-    elif state.get('active_skill', None):
-        pass
     else:
         return fallback_response()
 

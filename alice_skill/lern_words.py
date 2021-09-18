@@ -21,9 +21,18 @@ def chose_category():
 def learn_words_by_num(category, step):
     all_word = api.get_all_words_in_category(category)
     if len(all_word) <= step:
-        pass
+        return make_response(
+            text=texts.CONGRATS_LERN
+        )
     word = all_word[step]
     return make_response(
-        text= texts.WORD_TEMPALTE.format()
-
+        text=texts.WORD_TEMPALTE.format(
+            word=word["name_origin"],
+            translate=word["name_rus"]),
+        tts=tts.WORD_TEMPALTE.format(
+            word=word["name_origin"],
+            translate=word["name_rus"]),
+        state={'active_skill': "learn_words",
+               "step": step + 1,
+               "category": category}
     )

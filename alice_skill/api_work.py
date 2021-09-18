@@ -8,8 +8,8 @@ def get_all_categories():
     response = requests.get(request_url).json()
     return json.loads(response)
 
+
 def get_all_words_in_category(category_id):
-    request_url = config.url + "/api/dictionary/groups/all"
+    request_url = config.url + f"/api/dictionary/group/word/{category_id}"
     response = requests.get(request_url).json()
     return json.loads(response)
-
