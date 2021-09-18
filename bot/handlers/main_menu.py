@@ -11,7 +11,7 @@ from utils import tatarby_api
 async def main_menu(message: types.Message, state: FSMContext):
     if message.text == buttons.from_tatar_to_russian:
         async with state.proxy() as data:
-            data["language"] = 0
+            data["language"] = 1
 
         return await message.answer(
             text=messages.MAIN_MENU.format(translator={
@@ -34,20 +34,21 @@ async def main_menu(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         # Если ввели одно слово
         if len(message.text.split()) != 1:
+            text = message.text + " - " + tatarby_api.translate_phrase(phrase=message.text, language=data["language"])
             await message.answer(
-                text=tatarby_api.translate_phrase(phrase=message.text, language=data["language"]))
+                text=text)
         else:
             answer = tatarby_api.translate_word(word=message.text, language=data["language"])
-
+            print(answer)
             text = messages.TRANSLATED_WORD_SNIPPET.format(
                 word_from_user=message.text,
                 word_from_api=answer["translation"]
             )
 
             if answer["examples"]:
+                print(answer["examples"])
                 text += messages.EXAMPLES.format(
                     examples=" ".join(answer["examples"])
                 )
 
             await message.answer(text=text)
-
