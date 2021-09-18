@@ -1,0 +1,60 @@
+'/api/register':
+  метод - POST
+  входные параметры - 'name', 'email', 'password'
+  выходные параметры:
+    успех:
+      'token', 'user': 'name', 'email', 'password', 'created_at' - дата регистрации
+    провал:
+      'message', 'errors' - ошибки возникшие при валидации
+      
+'/api/login':
+  метод - POST
+  входные параметры - 'name', 'email'
+  выходные параметры:
+    успех:
+      'token', 'user'
+    провал:
+      'message', 'errors'(при несовпадении email и пароля, поле удаляется)
+      
+'/api/untoken':
+  метод - GET
+  входные параметры:
+    header: 'authorization' - 'Bearer $$token$$'
+  выходные параметры:
+    успех:
+      'success' - true, 'message' - 'logged out'
+    провал:
+      'message' - 'Unauthenticated'
+
+'/api/dictionary/groups/all':
+  метод - GET
+  выходные параметры - список всех групп в бд
+  
+'/api/dictionary/words/all':
+  метод - GET
+  выходные параметры - список всех слов в бд
+  
+'/api/dictionary/groups/random/{count}':
+  метод - GET
+  входные параметры - $$count$$ в url
+  выходные параметры - список из $$count$$ рандомных групп в бд
+
+
+'/api/dictionary/words/random/{count}':
+  метод - GET
+  входные параметры - $$count$$ в url
+  выходные параметры - список из $$count$$ рандомных слов в бд
+
+
+'/api/dictionary/group/word/{id}':
+  метод - GET
+  входные параметры - $$count$$ в url
+  выходные параметры - список всех слов в группе с id $$id$$
+  
+  
+'/api/dictionary/words/group/{id}':
+  метод - GET
+  входные параметры - $$count$$ в url
+  выходные параметры - список всех слов в группе с id $$id$$
+
+
