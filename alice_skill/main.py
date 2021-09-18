@@ -12,13 +12,15 @@ def handler(event, context):
     payload = event["request"].get('payload', {})
     if event["session"]['new']:
         return start()
+    elif IntentsNames.stop in intents:
+        return make_response(text=texts.STOPED)
     # пейлоады
-    elif payload.get("category_button", False):
+    elif payload.get("category_button", None) is not None:
         return lern_words.learn_words_by_num(payload["category_button"], 0)
     # статусы
     elif state.get('active_skill', None):
         if state['active_skill'] == "learn_words":
-            lern_words.learn_words_by_num(state["category"], state["step"])
+            return lern_words.learn_words_by_num(state["category"], state["step"])
     # интенты
     elif IntentsNames.send_fact in intents:
         return random_fact.send_random_fact()

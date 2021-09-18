@@ -13,7 +13,7 @@ def chose_category():
         items.append(item(title=category["name_origin"], description=category["name_rus"],
                           img_button=button(category["name_origin"], payload={"category_button": category["id"]})))
     return make_response(text="",
-                         tts="",
+                         tts=texts.CHOOSE_CATEGORY,
                          card=items_list(content=items,
                                          header=texts.CHOOSE_CATEGORY))
 

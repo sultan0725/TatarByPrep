@@ -9,3 +9,4 @@ class IntentsNames:
     send_fact = "send_fact"
     tatar_rules = "tatar_rules"
     lets_lern = "lets_lern"
+    stop = "stop"

@@ -1,1 +1,1 @@
-WORD_TEMPALTE = "{word}<sil500> - {translate}"
+WORD_TEMPALTE = "{word} sil<[500]> - {translate}"
