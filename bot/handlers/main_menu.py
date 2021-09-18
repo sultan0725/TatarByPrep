@@ -7,7 +7,7 @@ from view import buttons, messages, keyboards
 from utils import tatarby_api
 
 
-@dp.message_handler(state=User.MAIN_MENU, content_types=[types.ContentTypes.TEXT])
+@dp.message_handler(state=User.MAIN_MENU, content_types=['text'])
 async def main_menu(message: types.Message, state: FSMContext):
     if message.text == buttons.from_tatar_to_russian:
         async with state.proxy() as data:

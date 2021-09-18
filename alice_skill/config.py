@@ -1,6 +1,6 @@
 REQUEST_STATE = "session"
 RESPONSE_STATE = "session_state"
-url = ""
+url = "tatarinteam.ru"
 
 
 class IntentsNames:
