@@ -14,7 +14,9 @@ def handler(event, context):
         return random_fact.send_random_fact()
     elif IntentsNames.lets_lern in intents:
         pass
-    if state.get('active_skill', None):
+    elif IntentsNames.tatar_rules in intents:
+        return lexical_rules.about_rules(event)
+    elif state.get('active_skill', None):
         pass
     else:
         return fallback_response()
