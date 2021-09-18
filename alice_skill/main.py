@@ -13,6 +13,8 @@ def handler(event, context):
         return random_fact.send_random_fact()
     elif IntentsNames.tatar_rules in intents:
         return lexical_rules.about_rules(event)
+    elif IntentsNames.find_excess in intents:
+        return find_excess.start_find_excess(event)
     else:
         return fallback_response()
 

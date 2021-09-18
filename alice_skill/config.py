@@ -8,3 +8,4 @@ class IntentsNames:
     big_image = "big_image"
     send_fact = "send_fact"
     tatar_rules = "tatar_rules"
+    find_excess = "find_excess"
