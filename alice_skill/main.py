@@ -7,10 +7,15 @@ import alice_skill.complete_proverb as complete_proverb
 
 def handler(event, context):
     intents = event["request"].get("nlu", {}).get('intents', [])
+    state = event.get('state').get(REQUEST_STATE, {})
     if event["session"]['new']:
         return start()
-    if IntentsNames.send_fact in intents:
+    elif IntentsNames.send_fact in intents:
         return random_fact.send_random_fact()
+    elif IntentsNames.lets_lern in intents:
+        pass
+    if state.get('active_skill', None):
+        pass
     else:
         return fallback_response()
 
