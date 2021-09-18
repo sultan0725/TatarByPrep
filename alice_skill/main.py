@@ -1,3 +1,4 @@
+from alice_skill import config
 from alice_skill.uttils import *
 import alice_skill.random_fact as random_fact
 import alice_skill.find_excess as find_excess
@@ -38,10 +39,25 @@ def handler(event, context):
         return lexical_rules.about_rules(event)
     elif IntentsNames.find_excess in intents:
         return find_excess.start_find_excess()
-
+    elif IntentsNames.skills in intents:
+        return get_skills()
     else:
         return fallback_response()
 
 
 def start():
     return make_response(texts.WELCOME)
+
+
+def get_skills():
+    items = []
+    for skill in config.skills:
+        items.append(item(
+            title=skill["title"],
+            description=skill["description"],
+            img_button=button(title=skill["button"])
+        ))
+    return make_response(text=texts.I_CAN,
+                         card=items_list(header=texts.I_CAN,
+                                         content=items)
+                         )
