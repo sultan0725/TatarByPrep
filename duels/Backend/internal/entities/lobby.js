@@ -60,6 +60,8 @@ module.exports = class Lobby {
         player.onJoinLobby(this);
 
         this.updateStatus();
+
+        trace('a player joined the lobby. now at ' + this.players.length + ' out of ' + this.max_players);
     }
 
     kickPlayer(player, reason, forced) {
@@ -69,20 +71,29 @@ module.exports = class Lobby {
         player.onKickLobby(this, reason, forced);
         player.lobby = null;
 
-        this.updateStatus();
+        if (reason !== 'lobby is closing!')
+            this.close();
+        // this.updateStatus();
     }
 
     async getTasks() {
         // cache the tasks
-        if (this.tasks === null)
-            this.tasks = await this.map.getTasks();
+        if (this.tasks === null) {
+            trace('about to generate tasks. ' + this.tasks);
+            this.tasks = this.map.getTasks();
+            this.tasks = await this.tasks;
+            trace('generated tasks for the lobby: ' + this.tasks.toString());
+        }
+        else if (!Array.isArray(this.tasks)) { // promise idk
+            await this.tasks;
+        }
         
         return this.tasks;
     }
 
     async addIntoPlay(player) {
         var tasks = await this.getTasks();
-        player.onPlay(this, tasks);
+        player.onPlay(this, tasks, this.map.minigame);
     }
 
     broadcast(data) {

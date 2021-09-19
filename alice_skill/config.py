@@ -1,6 +1,6 @@
 REQUEST_STATE = "session"
 RESPONSE_STATE = "session_state"
-url = "tatarinteam.ru"
+url = "http://tatarinteam.ru"
 
 
 class IntentsNames:
@@ -33,10 +33,11 @@ skills = [
      "image": None,
      "button": "Учить слова"},
 
-    {"title": "Интересный факт",
+    {"title": "Интересные факты",
      "description": "Расскажу что нибудь интересное про татарский язык",
      "image": None,
-     "button": "Интересный факт"},
+     "button": "Влияние татарского языка на русский",
+     "payload": {"fact": 1}},
 
     {"title": "Продолжи пословицу",
      "description": "Игра для прокачки своего перевода и для поплнения пословиц в свой запас",

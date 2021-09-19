@@ -6,16 +6,31 @@ module.exports = class MatchMaker {
         var match_lobby = null;
         // this a so called 'arrow function'.
         // (lobby) => {} is the same as function(lobby) {}
+
         Object.values(global.lobbies).forEach((lobby) => {
             // you can add additional checks for user rank, etc.
             // and your own matchmaking logic
-            if (!lobby.full && lobby.minigame) {
+            if (lobby.players.length > 0 && lobby.players.length < lobby.max_players && lobby.map.minigame === minigame) {
                 match_lobby = lobby;
             }
         });
 
+        // a second run
         if (match_lobby === null) {
-            map = global.maps.find(map => map.minigame === minigame);
+            Object.values(global.lobbies).forEach((lobby) => {
+                // you can add additional checks for user rank, etc.
+                // and your own matchmaking logic
+                if (!lobby.full && lobby.map.minigame === minigame) {
+                    match_lobby = lobby;
+                }
+        });
+        }
+
+        if (match_lobby === null) {
+            trace('searching for a map for the minigame ' + minigame);
+            var map = global.maps.find(map => map.minigame === minigame);
+            trace('found: ' + map.toString());
+            trace('all maps: ' + global.maps.toString());
             match_lobby = createLobby(map);
         }
 

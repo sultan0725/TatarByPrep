@@ -108,3 +108,14 @@ ws_server.on('connection', (socket) => {
 
 server.listen(port);
 trace("Server running on port " + port + "!");
+
+
+process.on('uncaughtException', function (err) {
+    console.error(err);
+    console.log("Node NOT Exiting...");
+});
+
+process.on('unhandledRejection', function (reason) {
+    console.error('Unhandled rejection: ' + reason);
+    console.log('wooh, saved from the crash!');
+});

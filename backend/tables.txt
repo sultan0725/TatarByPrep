@@ -10,8 +10,8 @@ users:
 
 word_group:
   id - int                | id
-  name_origin - string255 | имя группы на татарском
-  name_rus - string255    | имя группы на русском
+  word_original - string255 | имя группы на татарском
+  word_rus - string255    | имя группы на русском
   created_at - date       
   updated_at - date
 

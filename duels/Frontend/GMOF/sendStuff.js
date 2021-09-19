@@ -3,8 +3,8 @@
  * 
  * @param {string} lobbyid 
  */
-function sendJoinLobby(lobbyid) {
-    client.send({ cmd: "lobby join", lobbyid: lobbyid })
+function sendJoinLobby(minigame) {
+    client.send({ cmd: "lobby join", minigame })
 }
 
 function sendLeaveLobby() {
@@ -48,6 +48,10 @@ function sendRegister(username, password) {
 //     client.send({ cmd: "task list", type, amount });
 // }
 
-function sendTaskAnswer(correct, time) {
-    client.send({ cmd: "task answer" });
+function sendTaskAnswer(correct, timer) {
+    client.send({ cmd: "task answer", correct, timer });
+}
+
+function sendFinishTasks(score1, score2) {
+    client.send({ cmd: 'task finish', score1, score2 });
 }

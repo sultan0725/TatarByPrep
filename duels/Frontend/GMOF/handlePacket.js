@@ -16,27 +16,26 @@ client.on('lobby join', (data) => {
 });
 
 client.on('lobby reject', (data) => {
-    var lobby = data.lobby
-    var reason = data.reason
-    alert("Failed to join the lobby! Reason: " + reason)
+    var lobby = data.lobby;
+    var reason = data.reason;
+    alert("Failed to join the lobby! Reason: " + reason);
 });
 
 client.on('lobby leave', (data) => {
-    var lobby = data.lobby
-    var reason = data.reason
-    var forced = data.forced
-    window.lobby = undefined
+    var lobby = data.lobby;
+    var reason = data.reason;
+    var forced = data.forced;
+    window.lobby = undefined;
     if (forced)
-        show_message_async("Kicked from the lobby! Reason: " + reason)
+        alert("Kicked from the lobby! Reason: " + reason);
     else
-        show_message_async("You left the lobby")
+        alert("You left the lobby");
     
-    sendRequestLobbies()
+    sendRequestLobbies();
 });
 
 
 
-client.on('play', (data) => {
-    const tasks = data.tasks;
-    window.tasks = tasks;
-});
+// client.on('play', (data) => {
+    
+// });

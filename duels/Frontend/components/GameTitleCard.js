@@ -1,12 +1,12 @@
 
 export default function GameTitleCard(props) {
     var classes = ["card", "game-title-card", "m-2"];
-    if (props.duel) {
+    if (props.duels) {
         classes.push("border-warning");
     }
 
     var button_classes = ["btn", "btn-block", "btn-game-play"];
-    if (props.duel) {
+    if (props.duels) {
         button_classes.push("btn-warning");
     } else {
         button_classes.push("btn-success");
@@ -32,13 +32,18 @@ export default function GameTitleCard(props) {
                     props.game_desc
                 ),
                 React.createElement(
-                    "a",
-                    { href: "/games/" + props.game_id },
-                    React.createElement(
-                        "button",
-                        { className: button_classes.join(" ") },
-                        "\u0418\u0433\u0440\u0430\u0442\u044C!"
-                    )
+                    "button",
+                    { className: button_classes.join(" "), onClick: function onClick() {
+                            // if (props.duels)
+                            //     window.duels = true;
+                            // else window.duels = false;
+
+                            // window.minigame = 
+
+                            // setPage('TestGame');
+                            sendJoinLobby(props.game_id);
+                        } },
+                    "\u0418\u0433\u0440\u0430\u0442\u044C!"
                 )
             )
         )
