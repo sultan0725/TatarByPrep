@@ -15,6 +15,7 @@ def language_kb(language: int):
 main_menu_kb = ReplyKeyboardMarkup(one_time_keyboard=False, resize_keyboard=True)
 main_menu_kb.add(KeyboardButton(buttons.translator))
 main_menu_kb.add(KeyboardButton(buttons.lern_words))
+main_menu_kb.add(KeyboardButton(buttons.lern_sentenses))
 
 back = ReplyKeyboardMarkup(one_time_keyboard=False, resize_keyboard=True)
 back.add(KeyboardButton(buttons.back))

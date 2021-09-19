@@ -11,3 +11,4 @@ class User(StatesGroup):
     SEND_TRASLATIONS_IN_TEST = State()
     WAIT_FOR_ANSWER_FOR_TEST = State()
     TRANLATOR = State()
+    TRANSLATE_SENTENSE = State()

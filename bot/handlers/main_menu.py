@@ -1,5 +1,6 @@
 from aiogram import types
 
+from handlers.lern_sentenses import switch_to_sentences
 from handlers.tranlator import switch_to_translator
 from loader import dp
 from states.states import User
@@ -15,5 +16,7 @@ async def main_menu(message: types.Message, state: FSMContext):
         await switch_to_repeat(message, state)
     elif message.text == buttons.translator:
         await switch_to_translator(message, state)
+    elif message.text == buttons.lern_sentenses:
+        await switch_to_sentences(message, state)
     else:
         await message.answer(messages.USE_ONLY_BUTTONS, reply_markup=keyboards.main_menu_kb)
