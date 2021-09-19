@@ -22,17 +22,18 @@ def get_n_random_words(count):
 
 
 def get_word(word_id):
-    request_url = config.url + f"/api/dictionary/group/word/{word_id}"
+    request_url = config.url + "/api/dictionary/words/all"
     response = requests.get(request_url).json()
-    return response
+
+    for word in response:
+        if word_id == word["id"]:
+            return word
 
 
 def get_category(category_id):
-    # request_url = config.url + "/api/dictionary/groups/all"
-    # response = json.loads(requests.get(request_url).json())
-    response = [{'id': 1, "name_origin": 'что то на татарском', "name_rus": "груша"},
-                {'id': 2, "name_origin": 'что то на татарском', "name_rus": "яблоко"},
-                {'id': 3, "name_origin": 'что то на татарском', "name_rus": "повидло"}]
+    request_url = config.url + "/api/dictionary/groups/all"
+    response = requests.get(request_url).json()
+
     for category in response:
         if category_id == category["id"]:
             return category
