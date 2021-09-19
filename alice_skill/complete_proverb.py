@@ -22,7 +22,7 @@ def play_proverb(idd, payload):
                 box = i
                 break
     elif idd:
-        head = "Выберите ответ из кнопок, либо скажите 'хватит'"
+        head = "Выберите ответ из кнопок, либо скажите 'остановись'"
         for i in data.proverb:
             if i["id"] == idd:
                 box = i

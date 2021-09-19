@@ -11,7 +11,7 @@ async def main():
     all_users = crud.get_all_users()
     for user in all_users:
         user_id = user.telegram_id
-        await bot.send_message(user_id, text=messages.DO_U_REMEMBER.format(word=word["name_origin"]),
+        await bot.send_message(user_id, text=messages.DO_U_REMEMBER.format(word=word["word_original"]),
                                reply_markup=keyboards.remember_check(word["id"]))
 
 

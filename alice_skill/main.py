@@ -17,6 +17,8 @@ def handler(event, context):
     elif IntentsNames.stop in intents:
         return make_response(text=texts.STOPED, buttons=[button(title="Помощь", hide=True)])
     # пейлоады
+    elif payload.get("fact", None):
+        return random_fact.send_random_fact(buttons=[button(title="Ещё", hide=True, payload={"fact": 1})])
     elif payload.get("category_button", None) is not None:
         return lern_words.learn_words_by_num(payload["category_button"], 0)
     # статусы
@@ -46,7 +48,7 @@ def handler(event, context):
     elif IntentsNames.tell_phraseology in intents:
         return complete_proverb.start_proverb()
     elif IntentsNames.send_fact in intents:
-        return random_fact.send_random_fact()
+        return random_fact.send_random_fact(buttons=[button(title="Ещё", hide=True, payload={"fact": 1})])
     elif IntentsNames.lets_lern in intents:
         return lern_words.chose_category()
     elif IntentsNames.tatar_rules in intents:

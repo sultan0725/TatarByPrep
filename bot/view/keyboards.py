@@ -34,7 +34,7 @@ def remember_check(word_id):
 
 
 def all_categories():
-    all_categories = list(map(lambda x: [x["name_origin"], x["name_rus"], x["id"]], service_api.get_all_categories()))
+    all_categories = list(map(lambda x: [x["word_original"], x["word_rus"], x["id"]], service_api.get_all_categories()))
     kb = InlineKeyboardMarkup()
     for category in all_categories:
         kb.add(InlineKeyboardButton(f"{category[0]}({category[1]})", callback_data=f"lern_{category[2]}"))
