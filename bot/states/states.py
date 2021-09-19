@@ -13,3 +13,4 @@ class User(StatesGroup):
     TRANLATOR = State()
     TRANSLATE_SENTENSE = State()
     FIND_EXESS = State()
+    COMPLATE_PROVERB = State()

@@ -16,9 +16,8 @@ def language_kb(language: int):
 
 main_menu_kb = ReplyKeyboardMarkup(one_time_keyboard=False, resize_keyboard=True)
 main_menu_kb.add(KeyboardButton(buttons.translator))
-main_menu_kb.add(KeyboardButton(buttons.lern_words))
-main_menu_kb.add(KeyboardButton(buttons.find_excess))
-main_menu_kb.add(KeyboardButton(buttons.lern_sentenses))
+main_menu_kb.row(KeyboardButton(buttons.lern_words), KeyboardButton(buttons.lern_sentenses))
+main_menu_kb.row(KeyboardButton(buttons.find_excess), KeyboardButton(buttons.complete_proverb))
 
 back = ReplyKeyboardMarkup(one_time_keyboard=False, resize_keyboard=True)
 back.add(KeyboardButton(buttons.back))
