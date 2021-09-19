@@ -12,7 +12,9 @@ class IntentsNames:
     find_excess = "find_excess"
     lets_lern = "lets_lern"
     stop = "stop"
+    start_play = "start_play"
     skills = "skills"
+    tell_phraseology = "tell_phraseology"
 
 
 skills = [
@@ -35,4 +37,9 @@ skills = [
      "description": "Расскажу что нибудь интересное про татарский язык",
      "image": None,
      "button": "Интересный факт"},
+
+    {"title": "Продолжи пословицу",
+     "description": "Мини-игра для прокачки своего перевода и для поплнения пословиц в свой запас",
+     "image": None,
+     "button": "Продолжи пословицу"},
 ]
