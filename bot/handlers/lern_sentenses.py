@@ -33,17 +33,20 @@ async def set_number(message: types.Message, state: FSMContext):
         return
 
     if message.text == buttons.skip:
-        await message.answer("ОТВЕТ: " + data.sentinses[fsm_data["category"]][fsm_data["sentinse"]]["rus"])
+        await message.answer("ответ: <b>" + data.sentinses[fsm_data["category"]][fsm_data["sentinse"]]["rus"] +
+                             f"</b>\n Вам стоит повторить тему: <i>{fsm_data['category']}</i>")
         await state.set_data(fsm_data)
         await send_question(message, state, fsm_data["category"])
         return
 
     if data.sentinses[fsm_data["category"]][fsm_data["sentinse"]]["rus"].strip(" ").lower() == answer.strip(
             " ").lower():
-        await message.answer("ВЕРНО!")
+        await message.answer("Правильно!")
         await state.set_data(fsm_data)
         await send_question(message, state)
     else:
-        await message.answer("НЕВЕРНО! ПРАВИЛЬНЫЙ ОТВЕТ: " + data.sentinses[fsm_data["category"]][fsm_data["sentinse"]]["rus"])
+        await message.answer(
+            "Неправильно! правильный ответ: <b>" + data.sentinses[fsm_data["category"]][fsm_data["sentinse"]]["rus"] +
+            f"</b>\n Вам стоит повторить тему: <i>{fsm_data['category']}</i>")
         await state.set_data(fsm_data)
         await send_question(message, state, fsm_data["category"])

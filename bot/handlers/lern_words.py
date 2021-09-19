@@ -1,4 +1,4 @@
-from random import choice
+from random import choice, randint
 
 from aiogram import types
 
@@ -36,12 +36,12 @@ async def send_question(message: types.Message, state: FSMContext, is_new=True):
         await switchers.main_menu(message, state)
         return
     if is_new:
-        data["q_id"] = choice(data["key_words"])
-        while data["correct_check"][data["q_id"] - 1] >= data["repits"]:
-            data["q_id"] = choice(data["key_words"])
+        data["q_id"] = randint(0, len(data["key_words"]) - 1)
+        while data["correct_check"][data["q_id"]] >= data["repits"]:
+            data["q_id"] = randint(0, len(data["key_words"]) - 1)
         data["flag"] = True
     await state.set_data(data)
-    await message.answer(service_api.get_word(data["q_id"])["name_origin"], reply_markup=keyboards.lern_keyboard)
+    await message.answer(service_api.get_word(data["key_words"][data["q_id"]])["word_original"], reply_markup=keyboards.lern_keyboard)
     await User.WAIT_FOR_ANSWER_FOR_TEST.set()
 
 
@@ -56,22 +56,22 @@ async def set_number(message: types.Message, state: FSMContext):
         await switchers.main_menu(message, state)
         return
 
-    word = service_api.get_word(data["q_id"])
+    word = service_api.get_word(data["key_words"][data["q_id"]])
     if message.text == buttons.skip:
         if data["flag"]:
-            if data["correct_check"][data["key_words"].index(data["q_id"])] <= 0:
-                data["correct_check"][data["key_words"].index(data["q_id"])] -= 1
+            if data["correct_check"][data["q_id"]] <= 0:
+                data["correct_check"][data["q_id"]] -= 1
             else:
-                data["correct_check"][data["key_words"].index(data["q_id"])] = 0
-        await message.answer("ОТВЕТ: " + word["name_rus"])
+                data["correct_check"][data["q_id"]] = 0
+        await message.answer("ОТВЕТ: " + word["word_rus"])
         data["flag"] = False
         await state.set_data(data)
         await send_question(message, state, False)
         return
 
-    if word["name_rus"].strip(" ").lower() == answer.strip(" ").lower():
+    if word["word_rus"].strip(" ").lower() == answer.strip(" ").lower():
         if data["flag"]:
-            data["correct_check"][data["q_id"] - 1] += 1
+            data["correct_check"][data["q_id"]] += 1
         temp_res = sum(data["correct_check"].copy())
         target = len(data["key_words"]) * data["repits"]
         if temp_res < 0:
@@ -84,11 +84,11 @@ async def set_number(message: types.Message, state: FSMContext):
         await send_question(message, state)
     else:
         if data["flag"]:
-            if data["correct_check"][data["key_words"].index(data["q_id"])] <= 0:
-                data["correct_check"][data["key_words"].index(data["q_id"])] -= 1
+            if data["correct_check"][data["q_id"]] <= 0:
+                data["correct_check"][data["q_id"]] -= 1
             else:
-                data["correct_check"][data["key_words"].index(data["q_id"])] = 0
-        await message.answer("НЕВЕРНО! ПРАВИЛЬНЫЙ ОТВЕТ: " + word["name_rus"])
+                data["correct_check"][data["q_id"]] = 0
+        await message.answer("НЕВЕРНО! ПРАВИЛЬНЫЙ ОТВЕТ: " + word["word_rus"])
         data["flag"] = False
         await state.set_data(data)
         await send_question(message, state, False)
