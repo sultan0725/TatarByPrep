@@ -24,7 +24,7 @@ def continue_find_excess(idd, payload):
                 box = i
                 break
     elif idd:
-        head = "Выберите ответ из кнопок. Либо скажите 'хватит'"
+        head = "Выберите ответ из кнопок, либо скажите 'хватит'"
         buttons = []
         for i in data.excess:
             if i["id"] == idd:
