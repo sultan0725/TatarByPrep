@@ -41,7 +41,7 @@ async def send_question(message: types.Message, state: FSMContext, is_new=True):
             data["q_id"] = choice(data["key_words"])
         data["flag"] = True
     await state.set_data(data)
-    await message.answer(service_api.get_word(data["q_id"])["name_origin"], reply_markup=keyboards.lern_keyboard)
+    await message.answer(service_api.get_word(data["q_id"])["word_original"], reply_markup=keyboards.lern_keyboard)
     await User.WAIT_FOR_ANSWER_FOR_TEST.set()
 
 
@@ -63,13 +63,13 @@ async def set_number(message: types.Message, state: FSMContext):
                 data["correct_check"][data["key_words"].index(data["q_id"])] -= 1
             else:
                 data["correct_check"][data["key_words"].index(data["q_id"])] = 0
-        await message.answer("ОТВЕТ: " + word["name_rus"])
+        await message.answer("ОТВЕТ: " + word["word_rus"])
         data["flag"] = False
         await state.set_data(data)
         await send_question(message, state, False)
         return
 
-    if word["name_rus"].strip(" ").lower() == answer.strip(" ").lower():
+    if word["word_rus"].strip(" ").lower() == answer.strip(" ").lower():
         if data["flag"]:
             data["correct_check"][data["q_id"] - 1] += 1
         temp_res = sum(data["correct_check"].copy())
@@ -88,7 +88,7 @@ async def set_number(message: types.Message, state: FSMContext):
                 data["correct_check"][data["key_words"].index(data["q_id"])] -= 1
             else:
                 data["correct_check"][data["key_words"].index(data["q_id"])] = 0
-        await message.answer("НЕВЕРНО! ПРАВИЛЬНЫЙ ОТВЕТ: " + word["name_rus"])
+        await message.answer("НЕВЕРНО! ПРАВИЛЬНЫЙ ОТВЕТ: " + word["word_rus"])
         data["flag"] = False
         await state.set_data(data)
         await send_question(message, state, False)

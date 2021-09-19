@@ -6,6 +6,6 @@ import alice_skill.data as data
 from random import choice
 
 
-def send_random_fact():
+def send_random_fact(buttons=None):
     fact = choice(data.facts)
-    return make_response(text=fact)
+    return make_response(text=fact, buttons=buttons)

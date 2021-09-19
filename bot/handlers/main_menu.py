@@ -1,5 +1,7 @@
 from aiogram import types
 
+from handlers.complite_proverbs import switch_to_complete_proverb
+from handlers.find_excess import switch_to_find_excess
 from handlers.lern_sentenses import switch_to_sentences
 from handlers.tranlator import switch_to_translator
 from loader import dp
@@ -18,5 +20,9 @@ async def main_menu(message: types.Message, state: FSMContext):
         await switch_to_translator(message, state)
     elif message.text == buttons.lern_sentenses:
         await switch_to_sentences(message, state)
+    elif message.text == buttons.find_excess:
+        await switch_to_find_excess(message, state)
+    elif message.text == buttons.complete_proverb:
+        await switch_to_complete_proverb(message, state)
     else:
         await message.answer(messages.USE_ONLY_BUTTONS, reply_markup=keyboards.main_menu_kb)

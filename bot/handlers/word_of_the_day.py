@@ -28,13 +28,13 @@ async def check_is_correct(message: types.Message, state: FSMContext):
         return
     async with state.proxy() as data:
         word = service_api.get_word(data["current_word"])
-        if word["name_rus"] == message.text:
+        if word["word_rus"] == message.text:
             await message.answer(messages.CORRECT)
             await switchers.main_menu(message, state)
 
         else:
-            category_name = service_api.get_category(word["group_id"])["name_origin"]
-            await message.answer(messages.WRONG.format(word=word["name_rus"], category_name=category_name))
+            category_name = service_api.get_category(word["group_id"])["word_original"]
+            await message.answer(messages.WRONG.format(word=word["word_rus"], category_name=category_name))
             await switchers.main_menu(message, state)
 
         await bot.edit_message_reply_markup(message.from_user.id, data["message_id"], reply_markup=None)

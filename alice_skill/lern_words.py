@@ -27,12 +27,13 @@ def learn_words_by_num(category, step):
     word = all_word[step]
     return make_response(
         text=texts.WORD_TEMPALTE.format(
-            word=word["name_origin"],
-            translate=word["name_rus"]),
+            word=word["word_original"],
+            translate=word["word_rus"]),
         tts=tts.WORD_TEMPALTE.format(
-            word=word["name_origin"],
-            translate=word["name_rus"]),
+            word=word["word_original"],
+            translate=word["word_rus"]),
         state={'active_skill': "learn_words",
                "step": step + 1,
                "category": category}
     )
+
