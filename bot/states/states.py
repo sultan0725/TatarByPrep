@@ -12,3 +12,4 @@ class User(StatesGroup):
     WAIT_FOR_ANSWER_FOR_TEST = State()
     TRANLATOR = State()
     TRANSLATE_SENTENSE = State()
+    FIND_EXESS = State()
