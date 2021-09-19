@@ -43,8 +43,8 @@ module.exports = class Client extends SendStuff {
         this.sendKickLobby(lobby, reason, true);
     }
 
-    onPlay(lobby, start_pos) {
-        this.sendPlay(lobby, start_pos);
+    onPlay(lobby, tasks, minigame) {
+        this.sendPlay(lobby, tasks, minigame);
     }
 
     onDisconnect() {

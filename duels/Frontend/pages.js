@@ -1,3 +1,5 @@
 import GamesList from './pages/GamesList.js';
 import TestGame from './pages/TestGame.js';
-export { GamesList, TestGame };
+import Main from './pages/Main.js';
+import EndRoom from './pages/EndRoom.js';
+export { GamesList, TestGame, Main, EndRoom };

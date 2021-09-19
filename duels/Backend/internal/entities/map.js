@@ -4,7 +4,7 @@ module.exports = class Map { // represents a game map
     name = ''; // map's display name
     description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit';
     word_group = 1;
-    word_count = 3;
+    word_count = 10;
 
     mode = 'single'; // 'single' or 'pvp'
     minigame = 'word-trans'; // 
@@ -18,50 +18,61 @@ module.exports = class Map { // represents a game map
             this.max_players = 2;
             this.minigame = 'duels';
         }
+
+        this.api_url = `/tasks/${this.minigame}`;
+        if (this.minigame === 'word-trans' || this.minigame === 'trans-word') {
+            this.api_url += '/' + this.word_group;
+        }
+        this.api_url += '/' + this.word_count;
     }
 
     async getTasks() {
-        const tasks = await new Promise(function(resolve, reject) {
-            setTimeout(function() {
-                resolve([
-                    {
-                        items: [
-                            {
-                                original_word: 'алма',
-                                russian_word: 'яблоко'
-                            },
-                            {
-                                original_word: 'татарча',
-                                russian_word: 'татарский'
-                            }
-                        ],
-                        correct: 1
-                    }
-                ])
-            }, 1000);
+        // var tasks = await new Promise(function(resolve, reject) {
+        //     setTimeout(function() {
+        //         resolve([
+        //             {
+        //                 items: [
+        //                     {
+        //                         original_word: 'алма',
+        //                         russian_word: 'яблоко'
+        //                     },
+        //                     {
+        //                         original_word: 'татарча',
+        //                         russian_word: 'татарский'
+        //                     }
+        //                 ],
+        //                 correct: 1
+        //             }
+        //         ])
+        //     }, 1000);
+        // });
+        return await api.get(this.api_url).then(function(response) {
+            return response.data;
+        }).catch(function(err) {
+            console.error('Error while polling the API:' + err);
         });
 
-        var map = this;
-        tasks = tasks.map((task) => {
-            let new_task = {};
+        // var map = this;
+        // tasks = tasks.map((task) => {
+        //     let new_task = {};
 
-            new_task.correct = task.correct;
-            switch(map.minigame)
-            {
-                case 'duels':
-                    new_task.question = 'Выбери правильный ответ :p';
-                    new_task.answers = task.items.map((item) => item.russian_word);
-                    break;
-                case 'word-trans':
-                    new_task.answers = task.items.map((item) => item.russian_word);
-                    break
-                case 'trans-word':
-                    new_task.answers = task.items.map((item) => item.original_word);
-                    break;
-            }
+        //     new_task.correct = task.correct;
+        //     switch(map.minigame)
+        //     {
+        //         case 'duels':
+        //             new_task.question = 'Выбери правильный ответ :p';
+        //             new_task.answers = task.items.map((item) => item.russian_word);
+        //             break;
+        //         case 'word-trans':
+        //             new_task.answers = task.items.map((item) => item.russian_word);
+        //             break
+        //         case 'trans-word':
+        //             new_task.answers = task.items.map((item) => item.original_word);
+        //             break;
+        //     }
 
-            return new_task;
-        });
+        //     return new_task;
+        // });
 
         return tasks;
 

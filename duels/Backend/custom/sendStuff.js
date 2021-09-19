@@ -112,13 +112,25 @@ module.exports = class SendStuff {
         this.write({ cmd: 'lobby info', lobby: global.lobbies[lobbyid].serialize()})
     }
 
-    sendPlay(lobby, tasks) {
-        this.write({ cmd: 'play', lobby: lobby.serialize(), tasks });
+    sendPlay(lobby, tasks, minigame) {
+        this.write({ cmd: 'play', lobby: lobby.serialize(), tasks, minigame });
     }
 
     // #################################
     // You can write your wrappers here:
     sendTaskNext(winner) {
-        this.send({ cmd: 'task next', won: winner === this });
+        this.send({ cmd: 'task next', won: winner === null ? -1 : winner === this });
+    }
+
+    sendLose() {
+        this.send({ cmd: 'duel end', result: 'You lost the duel!' });
+    }
+
+    sendWin() {
+        this.send({ cmd: 'duel end', result: 'You won the duel! Congrats!' });
+    }
+
+    sendDraw() {
+        this.send({ cmd: 'duel end', result: 'Draw! You and your opponent have equal score' });
     }
 }
