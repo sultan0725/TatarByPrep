@@ -15,7 +15,7 @@ def handler(event, context):
     if event["session"]['new']:
         return start()
     elif IntentsNames.stop in intents:
-        return make_response(text=texts.STOPED)
+        return make_response(text=texts.STOPED, buttons=[button(title="Помощь", hide=True)])
     # пейлоады
     elif payload.get("category_button", None) is not None:
         return lern_words.learn_words_by_num(payload["category_button"], 0)
@@ -28,7 +28,8 @@ def handler(event, context):
         if IntentsNames.start_play in intents:
             return find_excess.continue_find_excess(idd=state.get("id", None), payload=payload)
         else:
-            return fallback_response('Вы вышли из мини-игры "лишнее слово". Теперь вы в главном меню')
+            return fallback_response('Вы вышли из мини-игры "лишнее слово". Теперь вы в главном меню',
+                                     butt=[button(title="Помощь", hide=True)])
     elif state.get("screen", None) == "find_excess":
         return find_excess.continue_find_excess(idd=state.get("id", None), payload=payload)
 
@@ -36,7 +37,8 @@ def handler(event, context):
         if IntentsNames.start_play in intents:
             return complete_proverb.play_proverb(idd=state.get("id", None), payload=payload)
         else:
-            return fallback_response('Вы вышли из мини-игры "лишнее слово". Теперь вы в главном меню')
+            return fallback_response('Вы вышли из мини-игры "лишнее слово". Теперь вы в главном меню',
+                                     butt=[button(title="Помощь", hide=True)])
     elif state.get("proverb") == "play":
         return complete_proverb.play_proverb(idd=state.get("id", None), payload=payload)
 
@@ -54,11 +56,11 @@ def handler(event, context):
     elif IntentsNames.skills in intents:
         return get_skills()
     else:
-        return fallback_response()
+        return fallback_response(butt=[button(title="Помощь", hide=True)])
 
 
 def start():
-    return make_response(texts.WELCOME)
+    return make_response(texts.WELCOME, buttons=[button(title="Помощь", hide=True)])
 
 
 def get_skills():

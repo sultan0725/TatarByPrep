@@ -79,7 +79,7 @@ def image_gallery(image_items):
     }
 
 
-def fallback_response(text=None):
+def fallback_response(text=None, butt=None):
     if text:
-        return make_response(text)
-    return make_response(texts.FALLBACK_TEXT)
+        return make_response(text, buttons=butt)
+    return make_response(texts.FALLBACK_TEXT, buttons=butt)
