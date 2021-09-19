@@ -4121,3 +4121,33 @@
 [19.09.2021, 14:04:52] Hello from client: peppega
 [19.09.2021, 14:04:52] WebSocket connected!
 [19.09.2021, 14:04:52] Hello from client: peppega
+[19.09.2021, 14:05:40] Socket closed.
+[19.09.2021, 14:05:40] Socket closed.
+[19.09.2021, 14:05:52] WebSocket connected!
+[19.09.2021, 14:05:52] Hello from client: peppega
+[19.09.2021, 14:05:52] WebSocket connected!
+[19.09.2021, 14:05:52] Hello from client: peppega
+[19.09.2021, 14:14:20] Socket closed.
+[19.09.2021, 14:14:20] Socket closed.
+[19.09.2021, 14:14:27] WebSocket connected!
+[19.09.2021, 14:14:27] Hello from client: peppega
+[19.09.2021, 14:14:27] WebSocket connected!
+[19.09.2021, 14:14:27] Hello from client: peppega
+[19.09.2021, 14:14:29] a player joined the lobby. now at 1 out of 2
+[19.09.2021, 14:14:29] a player joined the lobby. now at 2 out of 2
+[19.09.2021, 14:14:31] received an answer: [object Object]
+[19.09.2021, 14:14:32] received an answer: [object Object]
+[19.09.2021, 14:14:39] received an answer: [object Object]
+[19.09.2021, 14:14:40] received an answer: [object Object]
+[19.09.2021, 14:14:44] Socket closed.
+[19.09.2021, 14:14:44] Socket closed.
+[19.09.2021, 14:14:50] WebSocket connected!
+[19.09.2021, 14:14:51] Hello from client: peppega
+[19.09.2021, 14:14:51] WebSocket connected!
+[19.09.2021, 14:14:51] Hello from client: peppega
+[19.09.2021, 14:22:44] Socket closed.
+[19.09.2021, 14:22:44] Socket closed.
+[19.09.2021, 14:22:52] WebSocket connected!
+[19.09.2021, 14:22:52] WebSocket connected!
+[19.09.2021, 14:22:52] Hello from client: peppega
+[19.09.2021, 14:22:52] Hello from client: peppega

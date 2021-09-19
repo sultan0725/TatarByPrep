@@ -6,7 +6,7 @@ const dev_config = {
 }
 
 const prod_config = {
-    server_ip: "xxxx",
+    server_ip: "tatarinteam.ru",
     server_port: 3000 // the WebSocket port
 }
 
