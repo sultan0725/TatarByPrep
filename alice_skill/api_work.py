@@ -10,7 +10,7 @@ def get_all_categories():
 
 
 def get_all_words_in_category(category_id):
-    request_url = config.url + f"/api/dictionary/group/word/{category_id}"
+    request_url = config.url + f"/api/dictionary/words/group/{category_id}"
     response = requests.get(request_url).json()
     return response[:10]
 
