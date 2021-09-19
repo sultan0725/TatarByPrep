@@ -7,15 +7,6 @@ from view import buttons, keyboards
 
 async def main_menu(message: types.Message, state: FSMContext):
     await User.MAIN_MENU.set()
-    async with state.proxy() as data:
-        print(data)
-        text = messages.MAIN_MENU.format(translator={
-            0: buttons.from_russian_to_tatar,
-            1: buttons.from_tatar_to_russian
-        }[data["language"] if data else 0])
-        print("text")
-        kb = keyboards.main_menu_kb(data["language"] if data else 0)
-        print("kb")
-        await message.answer(
-            text=text,
-            reply_markup=kb)
+    await message.answer(
+        text=messages.MAIN_MENU,
+        reply_markup=keyboards.main_menu_kb)
