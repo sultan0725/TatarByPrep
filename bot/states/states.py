@@ -7,3 +7,7 @@ class User(StatesGroup):
     START_SEND_LOGIN = State()
     START_SEND_PASSWORD = State()
     SEND_TRASLATIONS = State()
+    CHOOSE_CATEGORY = State()
+    SEND_TRASLATIONS_IN_TEST = State()
+    WAIT_FOR_ANSWER_FOR_TEST = State()
+    TRANLATOR = State()
